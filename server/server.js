@@ -63,7 +63,7 @@ const avatarUpload = multer({
   },
 });
 
-mongoose.connect("mongodb://127.0.0.1/mernDB", (err) => {
+mongoose.connect(process.env.MONGO_URI || "mongodb://127.0.0.1/mernDB", (err) => {
   if (err) console.log(err);
   else console.log("mongodb is connected");
 });
@@ -81,7 +81,7 @@ app.post("/", (req, res) => {
           id: dbUser._id,
           username: dbUser.username,
         };
-        const token = jwt.sign(payload, "newSecretKey", { expiresIn: 86400 });
+        const token = jwt.sign(payload, process.env.JWT_SECRET || "newSecretKey", { expiresIn: 86400 });
         return res.json({ status: "ok", user: token });
       } else {
         return res.json({ status: "error", user: false });
@@ -475,6 +475,7 @@ app.get("/search/:user", (req, res) => {
   );
 });
 
-app.listen("5000", () => {
-  console.log("server running on port 5000");
+const port = process.env.PORT || 5000;
+app.listen(port, () => {
+  console.log("server running on port " + port);
 });
