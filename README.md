@@ -1,6 +1,6 @@
 # MERN Twitter Clone
 
-[Live Demo on Netlify](https://twittter-clonness.netlify.app/)
+[Live Demo on Netlify](https://chhirp.netlify.app/)
 
 # @adobe/css-tools
 
